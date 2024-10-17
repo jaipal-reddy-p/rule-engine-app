@@ -1,0 +1,80 @@
+{
+  "database": "rule_engine_db",
+  "collection": "rules",
+  "operations": [
+    {
+      "operation": "insert",
+      "description": "Inserting a rule into the 'rules' collection.",
+      "document": {
+        "_id": { "$oid": "652d29338a9fba2a471edfd1" },
+        "rule_string": "age > 30 AND department = 'Sales'",
+        "rule_ast": {
+          "node_type": "AND",
+          "left": { "node_type": "operand", "value": "age > 30" },
+          "right": { "node_type": "operand", "value": "department = 'Sales'" }
+        },
+        "created_at": { "$date": "2024-10-16T10:00:00Z" }
+      },
+      "mongo_query": {
+        "method": "insert_one",
+        "arguments": {
+          "rule_string": "age > 30 AND department = 'Sales'",
+          "rule_ast": {
+            "node_type": "AND",
+            "left": { "node_type": "operand", "value": "age > 30" },
+            "right": { "node_type": "operand", "value": "department = 'Sales'" }
+          },
+          "created_at": "2024-10-16T10:00:00Z"
+        }
+      }
+    },
+    {
+      "operation": "retrieve",
+      "description": "Retrieving a rule by its _id.",
+      "query": {
+        "_id": { "$oid": "652d29338a9fba2a471edfd1" }
+      },
+      "mongo_query": {
+        "method": "find_one",
+        "arguments": {
+          "_id": { "$oid": "652d29338a9fba2a471edfd1" }
+        }
+      },
+      "expected_result": {
+        "_id": { "$oid": "652d29338a9fba2a471edfd1" },
+        "rule_string": "age > 30 AND department = 'Sales'",
+        "rule_ast": {
+          "node_type": "AND",
+          "left": { "node_type": "operand", "value": "age > 30" },
+          "right": { "node_type": "operand", "value": "department = 'Sales'" }
+        },
+        "created_at": { "$date": "2024-10-16T10:00:00Z" }
+      }
+    },
+    {
+      "operation": "query",
+      "description": "Query rules where department is 'Sales'.",
+      "query": {
+        "rule_ast.right.value": "department = 'Sales'"
+      },
+      "mongo_query": {
+        "method": "find",
+        "arguments": {
+          "rule_ast.right.value": "department = 'Sales'"
+        }
+      },
+      "expected_results": [
+        {
+          "_id": { "$oid": "652d29338a9fba2a471edfd1" },
+          "rule_string": "age > 30 AND department = 'Sales'",
+          "rule_ast": {
+            "node_type": "AND",
+            "left": { "node_type": "operand", "value": "age > 30" },
+            "right": { "node_type": "operand", "value": "department = 'Sales'" }
+          },
+          "created_at": { "$date": "2024-10-16T10:00:00Z" }
+        }
+      ]
+    }
+  ]
+}
