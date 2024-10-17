@@ -67,11 +67,12 @@ POST /evaluate_rule
 }
 
 
-#Testing
-1.Unit tests are located in the tests/ directory.
-2.Run the tests:
-python -m unittest discover -s tests
-3.Non-Functional Aspects
-Security: Use API authentication (e.g., JWT) to secure the endpoints.
-Performance: Ensure MongoDB indexing on rule data to improve query performance.
-Error Handling: Handles invalid rule strings, missing attributes, and malformed requests.
+##Testing
+
+1. Unit tests are located in the tests/ directory.
+2. Run the tests:
+   python -m unittest discover -s tests
+3. Non-Functional Aspects
+    Security: Use API authentication (e.g., JWT) to secure the endpoints.
+    Performance: Ensure MongoDB indexing on rule data to improve query performance.
+    Error Handling: Handles invalid rule strings, missing attributes, and malformed requests.
